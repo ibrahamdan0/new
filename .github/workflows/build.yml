@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CFLAGS: "-Wno-error=implicit-function-declaration -Wno-error=incompatible-pointer-types"
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +30,7 @@ jobs:
       - name: Install Buildozer and Cython
         run: |
           pip install --upgrade pip setuptools wheel
-          pip install --upgrade cython==0.29.36 buildozer
+          pip install --upgrade cython buildozer
 
       - name: Build with Buildozer
         run: |
